@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Antonella 💝</title>
 
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  overflow: hidden;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+/* TEXTO CENTRAL */
+#center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 42px;
+  color: #ff5fa2;
+  text-shadow: 0 0 20px #ff5fa2;
+  z-index: 10;
+}
+
+/* TEXTO CAYENDO */
+.fall {
+  position: absolute;
+  color: #ff2f7a;
+  font-size: 18px;
+  opacity: 0.9;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-50px);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+/* ESTRELLA */
+.star {
+  position: absolute;
+  color: #ff8fc7;
+  font-size: 14px;
+  opacity: 0.8;
+  animation: fade 2s forwards;
+}
+
+@keyframes fade {
+  to {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+/* CORAZONES */
+.heart {
+  position: absolute;
+  color: #ff5fa2;
+  font-size: 20px;
+  animation: heartFall linear forwards;
+}
+
+@keyframes heartFall {
+  from {
+    transform: translateY(-20px);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="center">Antonella 💝</div>
+
+<audio id="music" src="her.mp3" loop></audio>
+
+<script>
+const music = document.getElementById("music");
+
+document.body.addEventListener("click", () => {
+  music.play();
+});
+
+function createFallingText() {
+  const t = document.createElement("div");
+  t.className = "fall";
+  t.textContent = "Antonella";
+  t.style.left = Math.random() * window.innerWidth + "px";
+  t.style.animationDuration = (4 + Math.random() * 3) + "s";
+  document.body.appendChild(t);
+
+  setTimeout(() => {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.textContent = "✨ Antonella";
+    star.style.left = t.style.left;
+    star.style.top = "80%";
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 2000);
+    t.remove();
+  }, 3000);
+}
+
+function createHeart() {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.textContent = "💗";
+  h.style.left = Math.random() * window.innerWidth + "px";
+  h.style.animationDuration = (5 + Math.random() * 4) + "s";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}
+
+setInterval(createFallingText, 400);
+setInterval(createHeart, 800);
+</script>
+
+</body>
+</html>
